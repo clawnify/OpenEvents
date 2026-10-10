@@ -73,7 +73,8 @@ person their drafts are in the event's **To approve** tab.
 ## API anchors
 
 - `GET /api/events/{id}`: settings, counts, and `resolved_offer` (what to pitch).
-- `POST /api/runs/{id}/attendees`: shortlisted people with drafts, up to 25 a call.
+- `POST /api/runs/{id}/attendees`: shortlisted people with drafts, one person per call
+  right after their draft, so the person sees them arrive. Up to 25 a call.
   Rows answer `created`, `duplicate` (listed already, or contacted at another
   event: never draft for them) or `limit_reached` (stop).
 - `GET /api/events/{id}/messages?status=approved`: what a send run sends.
