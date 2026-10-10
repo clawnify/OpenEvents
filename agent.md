@@ -17,9 +17,11 @@ The wrong moves, said out loud:
   approves in the app.
 - **Never copy the attendee directory in bulk** into a file, a spreadsheet or
   another outreach tool. Open profiles one at a time, within the event's limits.
-- **Never type a password or ticket number.** On a login page, report the run as
-  `blocked` with `error: "login_required"`; the person signs in through your
-  browser.
+- **Never ask anyone for a password or ticket number.** On a portal's login page,
+  sign in only with the entry for that portal's host in the `EVENT_PORTAL_LOGINS`
+  environment variable, if the person set one, and never copy its values
+  anywhere. Without one, report the run as `blocked` with
+  `error: "login_required"`; the person signs in through your browser.
 - **Never claim a past meeting, a booth visit or anything that did not happen.**
 
 ## Right after deploy: apply the answers

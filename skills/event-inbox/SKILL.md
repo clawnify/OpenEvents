@@ -1,7 +1,7 @@
 ---
 name: event-inbox
 description: Read the event portal's messages and meetings and record anything new in the app. Never replies.
-version: 1
+version: 2
 ---
 
 # Event inbox
@@ -12,9 +12,12 @@ only: never reply, never send, never accept or decline a meeting.
 1. Use only the named app through your app tools. GET /api/runs/{run_id}; stop
    unless status is running. GET /api/events/{event_id} for portal_url and
    platform_notes. Read the notes before browsing.
-2. Open portal_url in your existing browser. On a login page, CAPTCHA, rate limit
-   or warning, PATCH the run {status: blocked, error} and stop. Never type a
-   password or ticket number.
+2. Open portal_url in your existing browser. On a login page:
+   if your environment has EVENT_PORTAL_LOGINS (JSON keyed by the portal's host)
+   with an entry for this host, sign in with those fields once. Never copy the
+   values into the app, a message, coverage or chat. With no entry, a failed
+   sign-in, a CAPTCHA, rate limit or warning: PATCH the run {status: blocked,
+   error} and stop. Never ask anyone for a password or ticket number.
 3. Open the portal's messages. For each thread with a message from the other
    person, record every message they sent, oldest first: POST
    /api/runs/{run_id}/inbound in batches of at most 25 with name, company if
