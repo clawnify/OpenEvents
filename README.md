@@ -11,6 +11,16 @@ Your agent goes through a conference's attendee portal, shortlists the people wo
 
 Built with **React + Tailwind** on a **Hono API** and a **SQLite** database, with a full OpenAPI surface so an agent can drive it.
 
+## See it in action
+
+Conceptual UI illustrations of the app's main capabilities, with fictional example data. Open an image to see the details.
+
+| Approve every message | Reasons you can check |
+|---|---|
+| [![A drafted message with its character count and the Approve button being clicked, in front of a list of approved messages waiting to be sent](previews/approve.png)](previews/approve.png) | [![A shortlisted person with why they fit and the quote the agent read on their website, in front of the run report](previews/evidence.png)](previews/evidence.png) |
+| **One first message per person** | **Replies waiting on you** |
+| [![A shortlist for a second event where one person is marked as already contacted at an earlier event](previews/dedupe.png)](previews/dedupe.png) | [![A message from another attendee with a reply being typed, in front of a meeting booked in the event portal](previews/inbox.png)](previews/inbox.png) |
+
 ## What it does
 
 Most events put their attendee directory and a chat inside a portal or an app. Working it by hand takes hours: open profiles, check who they are, look at their company, write something that isn't a template, keep track of who answered. OpenEvents splits that work:

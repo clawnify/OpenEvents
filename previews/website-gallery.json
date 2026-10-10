@@ -1,0 +1,30 @@
+[
+  {
+    "src": "previews/approve.png",
+    "alt": "Conceptual approval card: a shortlisted founder, why they fit, and a drafted message with its character count, with the Approve button being clicked. Behind it, a list of approved messages waiting to be sent.",
+    "caption": "Nothing goes out until you approve it.",
+    "width": 1600,
+    "height": 1000
+  },
+  {
+    "src": "previews/evidence.png",
+    "alt": "Conceptual shortlisted person showing why they fit and the quote the agent read on their website, with a pointer on the source link. Behind it, the run report: profiles opened, people researched, messages drafted.",
+    "caption": "Every reason comes with what was read.",
+    "width": 1600,
+    "height": 1000
+  },
+  {
+    "src": "previews/dedupe.png",
+    "alt": "Conceptual shortlist for a second event where one person is marked as already contacted at an earlier event, so no draft is written for her. Behind it, the earlier event's sent message.",
+    "caption": "Nobody gets a second first message.",
+    "width": 1600,
+    "height": 1000
+  },
+  {
+    "src": "previews/inbox.png",
+    "alt": "Conceptual inbox card with a message from another attendee asking to meet, and a reply being typed into the reply field. Behind it, a meeting booked in the event portal.",
+    "caption": "Replies wait for you, not for the agent.",
+    "width": 1600,
+    "height": 1000
+  }
+]
