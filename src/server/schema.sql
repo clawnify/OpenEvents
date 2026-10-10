@@ -18,7 +18,7 @@ CREATE TABLE IF NOT EXISTS events (
   language TEXT NOT NULL DEFAULT 'English',
   message_max_chars INTEGER NOT NULL DEFAULT 400,
   max_profiles INTEGER NOT NULL DEFAULT 60,
-  max_research INTEGER NOT NULL DEFAULT 15,
+  max_research INTEGER NOT NULL DEFAULT 5,   -- small first runs: tune who_to_meet and the offer on 5 drafts, then raise it
   max_sends INTEGER NOT NULL DEFAULT 20,
   platform_notes TEXT NOT NULL DEFAULT '[]', -- JSON array of strings the agent learned about the portal
   archived INTEGER NOT NULL DEFAULT 0,

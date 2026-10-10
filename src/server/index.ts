@@ -218,7 +218,7 @@ app.openapi(
        VALUES (?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?)`,
       [
         id, f.name, f.portal_url, f.starts_on ?? null, f.ends_on ?? null, f.location ?? "", f.icp ?? "", f.offer ?? "",
-        f.language ?? "English", f.message_max_chars ?? 400, f.max_profiles ?? 60, f.max_research ?? 15, f.max_sends ?? 20,
+        f.language ?? "English", f.message_max_chars ?? 400, f.max_profiles ?? 60, f.max_research ?? 5, f.max_sends ?? 20,
         JSON.stringify(f.platform_notes ?? []),
       ],
     );

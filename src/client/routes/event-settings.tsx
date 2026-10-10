@@ -74,7 +74,7 @@ export function EventSettingsTab({ event, onChanged }: { event: EventDetail; onC
         <CardTitle>Limits per run</CardTitle>
         <div className="grid gap-3 sm:grid-cols-3">
           <Field label="Profiles to open"><input className="input data" type="number" min={1} max={500} value={form.max_profiles} onChange={(e) => set("max_profiles", Number(e.target.value))} /></Field>
-          <Field label="People to research"><input className="input data" type="number" min={1} max={100} value={form.max_research} onChange={(e) => set("max_research", Number(e.target.value))} /></Field>
+          <Field label="People to research" hint="Each gets a draft. Start with 5, adjust who to meet and the offer from those drafts, then raise it."><input className="input data" type="number" min={1} max={100} value={form.max_research} onChange={(e) => set("max_research", Number(e.target.value))} /></Field>
           <Field label="Messages to send"><input className="input data" type="number" min={1} max={200} value={form.max_sends} onChange={(e) => set("max_sends", Number(e.target.value))} /></Field>
         </div>
       </Card>
