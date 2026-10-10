@@ -1,0 +1,14 @@
+{
+  "$schema": "https://app.clawnify.com/schema/v1/clawnify.json",
+  "name": "OpenEvents",
+  "description": "Work an event's attendee portal with your agent. It shortlists people worth meeting from the directory, researches each one and drafts a message; you approve every message before the agent sends it through the event's own chat. Replies, meetings and who was contacted are kept across events, so nobody is approached twice.",
+  "app": {
+    "provides": [
+      "events",
+      "attendees"
+    ],
+    "framework": "react+hono",
+    "database": true
+  },
+  "icon": "icon.svg"
+}
