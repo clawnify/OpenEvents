@@ -1,7 +1,7 @@
 ---
 name: event-shortlist
 description: Shortlist people worth meeting from an event's attendee directory, research them, and draft one message each for the user to approve.
-version: 5
+version: 6
 ---
 
 # Event shortlist
@@ -21,15 +21,15 @@ never claim a past meeting or anything that did not happen.
    {{env:NAME}} into it exactly; the platform substitutes the value. No names,
    a failed sign-in, CAPTCHA, rate limit or warning: PATCH the run {status:
    blocked, error} and stop. Never print a value or ask anyone for one.
-3. Open the portal's chats and meetings once. Everyone with a thread or a
-   meeting there is already in touch, by the user or another tool: skip them
-   for the whole run, whatever the app says.
+3. Skip anyone already in touch, by the user or another tool, whatever the
+   app says: everyone in the app's people list, and anyone whose chat (opened
+   from their own row or profile) holds a message or who has a meeting. A
+   scrolled chats list misses rows, so check each person before step 5.
 4. Find people matching icp with the portal's search, filters or suggestions.
    After each query, read its first results: keep a query that surfaces fits,
    drop one that does not, before paging it or trying more. Skip the host's and
    the user's own colleagues. Everyone you judge counts toward max_profiles,
-   including people read from a results list; stop at max_profiles. Judge each
-   fit strong, maybe or no.
+   results lists included; stop there. Judge each fit strong, maybe or no.
 5. Research at most max_research of the strong and maybe fits (strongest
    first), at most 4 page reads each: their company site first (set domain from
    it), then one public profile. No bio means no fit until their company site
