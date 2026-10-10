@@ -4,7 +4,7 @@ import { ExternalLink, Square } from "lucide-react";
 import { api, type EventDetail, type Meeting, type Run } from "../api";
 import { Avatar, Button, Tooltip } from "../components/ui";
 import { Notice } from "../components/layout";
-import { RUN_LABEL, RunBadge, ago, formatDateTime } from "../components/status";
+import { RUN_LABEL, RunBadge, ago, formatDateTime, isStopped } from "../components/status";
 import { TableSkeleton } from "./events";
 
 export function MeetingsTab({ event, version }: { event: EventDetail; version: number }) {
@@ -97,7 +97,7 @@ export function RunsTab({ runs, onChanged }: { runs: Run[]; onChanged: () => Pro
                       <Avatar name={r.stopped_by_name} src={r.stopped_by_avatar} size={18} />
                       <span className="font-medium text-foreground">{r.stopped_by_name}</span>
                     </p>
-                  ) : r.error ? <p className="text-destructive">{r.error}</p> : null}
+                  ) : r.error ? <p className={isStopped(r) ? "text-muted-foreground" : "text-destructive"}>{r.error}</p> : null}
                   {!r.coverage && !r.error ? <span className="text-faint">Nothing yet</span> : null}
                 </td>
                 <td className="px-4 py-3 text-right">

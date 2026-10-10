@@ -48,6 +48,9 @@ export function MessageBadge({ status }: { status: MessageStatus }) {
 
 export const RUN_LABEL = { shortlist: "Find people", send: "Send approved", inbox: "Check inbox" } as const;
 
+/** A person ended it with Stop. Older runs carry only the text, without who. */
+export const isStopped = (run: Run) => run.status === "failed" && (Boolean(run.stopped_by_name) || run.error.startsWith("Stopped by "));
+
 export function RunBadge({ run }: { run: Run }) {
   if (run.status === "running") {
     if (run.stale) return <Badge tone="warning">Stalled</Badge>;
@@ -56,6 +59,7 @@ export function RunBadge({ run }: { run: Run }) {
   }
   if (run.status === "done") return <Badge tone="success">Done</Badge>;
   if (run.status === "blocked") return <Badge tone="warning">Blocked</Badge>;
+  if (isStopped(run)) return <Badge tone="neutral">Stopped</Badge>;
   return <Badge tone="danger">Failed</Badge>;
 }
 
