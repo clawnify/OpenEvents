@@ -55,6 +55,8 @@ export interface Run {
   dispatched: boolean;
   heartbeat_at: string | null;
   finished_at: string | null;
+  stopped_by_name: string | null;
+  stopped_by_avatar: string | null;
   created_at: string;
 }
 

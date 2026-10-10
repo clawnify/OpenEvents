@@ -45,9 +45,9 @@ app.onError((err, c) => {
 function actor(c: C): Actor {
   const who = caller(c);
   const u = user(c);
-  if ((who === "user" || who === "api") && u) return { approver: true, name: u.name ?? u.email ?? "A teammate" };
-  if (who === "public" && !c.env.CLAWNIFY_TOKEN) return { approver: true, name: "Local" };
-  return { approver: false, name: who };
+  if ((who === "user" || who === "api") && u) return { approver: true, name: u.name ?? u.email ?? "A teammate", avatar: u.avatarUrl };
+  if (who === "public" && !c.env.CLAWNIFY_TOKEN) return { approver: true, name: "Local", avatar: null };
+  return { approver: false, name: who, avatar: null };
 }
 
 const appUrl = (c: C) => new URL(c.req.url).origin;
@@ -105,6 +105,8 @@ const Run = z.object({
   id: z.string(), event_id: z.string(), kind: z.enum(["shortlist", "send", "inbox"]),
   status: z.enum(["running", "done", "failed", "blocked"]), stale: z.boolean(), coverage: z.string(), error: z.string(),
   skill_version: z.string(), dispatched: z.boolean(), heartbeat_at: z.string().nullable(), finished_at: z.string().nullable(),
+  stopped_by_name: z.string().nullable().openapi({ description: "The person who stopped the run; null when it ended itself" }),
+  stopped_by_avatar: z.string().nullable(),
   created_at: z.string(), updated_at: z.string(),
 }).openapi("Run");
 
@@ -620,9 +622,14 @@ app.post("/api/events/:id/dispatch", async (c) => {
 });
 
 app.post("/api/runs/:id/stop", async (c) => {
-  if (!actor(c).approver) throw new InputError("Only a person can stop a run from here.", 403);
+  const who = actor(c);
+  if (!who.approver) throw new InputError("Only a person can stop a run from here.", 403);
   const r = await openRun(Id.parse(c.req.param("id")));
-  await run("UPDATE runs SET status = 'failed', error = 'Stopped by a person', finished_at = datetime('now'), updated_at = datetime('now') WHERE id = ?", [r.id]);
+  await run(
+    `UPDATE runs SET status = 'failed', error = ?, stopped_by_name = ?, stopped_by_avatar = ?,
+       finished_at = datetime('now'), updated_at = datetime('now') WHERE id = ?`,
+    [`Stopped by ${who.name}`, who.name, who.avatar, r.id],
+  );
   return c.json(presentRun(await readRun(r.id)));
 });
 

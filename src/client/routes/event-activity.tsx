@@ -2,7 +2,7 @@ import { useEffect, useState } from "react";
 import { Link } from "react-router-dom";
 import { ExternalLink, Square } from "lucide-react";
 import { api, type EventDetail, type Meeting, type Run } from "../api";
-import { Button, Tooltip } from "../components/ui";
+import { Avatar, Button, Tooltip } from "../components/ui";
 import { Notice } from "../components/layout";
 import { RUN_LABEL, RunBadge, ago, formatDateTime } from "../components/status";
 import { TableSkeleton } from "./events";
@@ -91,7 +91,13 @@ export function RunsTab({ runs, onChanged }: { runs: Run[]; onChanged: () => Pro
                 <td className="px-4 py-3 text-muted-foreground">{ago(r.created_at)}</td>
                 <td className="max-w-xl px-4 py-3">
                   {r.coverage ? <p>{r.coverage}</p> : null}
-                  {r.error ? <p className="text-destructive">{r.error}</p> : null}
+                  {r.stopped_by_name ? (
+                    <p className="flex items-center gap-1.5 text-muted-foreground">
+                      <span>Stopped by</span>
+                      <Avatar name={r.stopped_by_name} src={r.stopped_by_avatar} size={18} />
+                      <span className="font-medium text-foreground">{r.stopped_by_name}</span>
+                    </p>
+                  ) : r.error ? <p className="text-destructive">{r.error}</p> : null}
                   {!r.coverage && !r.error ? <span className="text-faint">Nothing yet</span> : null}
                 </td>
                 <td className="px-4 py-3 text-right">

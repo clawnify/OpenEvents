@@ -50,6 +50,8 @@ CREATE TABLE IF NOT EXISTS runs (
   dispatched INTEGER NOT NULL DEFAULT 0,   -- 0: handed over by hand (no platform), or not yet
   heartbeat_at TEXT,
   finished_at TEXT,
+  stopped_by_name TEXT,                    -- the person who pressed Stop; null when the run ended itself
+  stopped_by_avatar TEXT,
   created_at TEXT NOT NULL DEFAULT (datetime('now')),
   updated_at TEXT NOT NULL DEFAULT (datetime('now'))
 );

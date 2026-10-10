@@ -48,6 +48,8 @@ export interface RunRow {
   dispatched: number;
   heartbeat_at: string | null;
   finished_at: string | null;
+  stopped_by_name: string | null;
+  stopped_by_avatar: string | null;
   created_at: string;
   updated_at: string;
   stale?: number;
@@ -405,6 +407,7 @@ export async function addMeetings(runId: string, rows: MeetingInput[]) {
 export interface Actor {
   approver: boolean;
   name: string;
+  avatar: string | null;
 }
 
 export async function readMessage(id: string): Promise<MessageRow> {

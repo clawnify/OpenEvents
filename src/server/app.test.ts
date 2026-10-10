@@ -19,7 +19,10 @@ const STORAGE = {
 
 type Who = "user" | "agent" | "agent-browser" | "local";
 const HEADERS: Record<Who, Record<string, string>> = {
-  user: { "X-Clawnify-Caller": "user", "X-Clawnify-User-Id": "u1", "X-Clawnify-User-Name": "Jordan Lee", "X-Clawnify-Org-Id": "o1" },
+  user: {
+    "X-Clawnify-Caller": "user", "X-Clawnify-User-Id": "u1", "X-Clawnify-User-Name": "Jordan Lee", "X-Clawnify-Org-Id": "o1",
+    "X-Clawnify-User-Avatar": "https://avatars.example/jordan.png",
+  },
   agent: { "X-Clawnify-Caller": "agent", "X-Clawnify-Org-Id": "o1" },
   "agent-browser": { "X-Clawnify-Caller": "agent-browser" },
   local: {},
@@ -207,6 +210,20 @@ describe("inbox", () => {
     const reply = await call("POST", `/api/attendees/${attendeeId}/messages`, { body: "Happy to. Tuesday?" });
     expect(reply.body.status).toBe("approved");
     expect((await call("GET", `/api/events/${eventId}`)).body.counts.waiting).toBe(0);
+  });
+
+  it("records who stopped a run, and only a person can", async () => {
+    const eventId = await newEvent();
+    const runId = await newRun(eventId, "shortlist");
+    expect((await call("POST", `/api/runs/${runId}/stop`, undefined, "agent")).status).toBe(403);
+
+    const stopped = await call("POST", `/api/runs/${runId}/stop`);
+    expect(stopped.status).toBe(200);
+    expect(stopped.body).toMatchObject({
+      status: "failed", error: "Stopped by Jordan Lee",
+      stopped_by_name: "Jordan Lee", stopped_by_avatar: "https://avatars.example/jordan.png",
+    });
+    expect((await call("PATCH", `/api/runs/${runId}`, { status: "running" }, "agent")).status).toBe(410);
   });
 
   it("records a meeting once and marks the person", async () => {

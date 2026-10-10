@@ -41,6 +41,38 @@ export function Favicon({ domain, size = 12 }: { domain?: string | null; size?: 
   );
 }
 
+/**
+ * A person's picture, or their initials when there is none or it fails to load.
+ * The name always sits next to it, so the image is decorative.
+ */
+export function Avatar({ name, src, size = 20 }: { name: string; src?: string | null; size?: number }) {
+  const [err, setErr] = useState(false);
+  const initials = name.split(/\s+/).filter(Boolean).slice(0, 2).map((w) => w[0]!.toUpperCase()).join("");
+  if (src && !err) {
+    return (
+      <img
+        src={src}
+        alt=""
+        width={size}
+        height={size}
+        loading="lazy"
+        referrerPolicy="no-referrer"
+        className="shrink-0 rounded-full object-cover"
+        onError={() => setErr(true)}
+      />
+    );
+  }
+  return (
+    <span
+      aria-hidden
+      style={{ width: size, height: size, fontSize: size * 0.42 }}
+      className="inline-flex shrink-0 items-center justify-center rounded-full bg-muted font-medium text-muted-foreground"
+    >
+      {initials}
+    </span>
+  );
+}
+
 /** Card title row: 17px/600 sentence case, an optional meta value at the right. */
 export function CardTitle({ children, right }: { children: ReactNode; right?: ReactNode }) {
   return (
