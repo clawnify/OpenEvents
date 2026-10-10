@@ -27,7 +27,6 @@
   },
   "agent": "agent.md",
   "deploy": {
-    "title": "Deploy OpenEvents",
     "subtitle": "Your agent works the attendee list of your next event. You approve every message before it goes out.",
     "prompts": [
       {
