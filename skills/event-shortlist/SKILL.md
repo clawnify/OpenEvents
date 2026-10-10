@@ -1,7 +1,7 @@
 ---
 name: event-shortlist
 description: Shortlist people worth meeting from an event's attendee directory, research them, and draft one message each for the user to approve.
-version: 2
+version: 3
 ---
 
 # Event shortlist
@@ -24,7 +24,8 @@ never claim a past meeting or anything that did not happen.
    search does not filter, browse the list. Skip the host's and the user's own
    colleagues. Open at most max_profiles profiles. Judge each from its profile:
    fit strong, maybe or no.
-4. Research strong and maybe fits, at most 4 page reads each: their company site
+4. Research at most max_research of the strong and maybe fits (strongest
+   first), at most 4 page reads each: their company site
    first, then one public profile. Say what the company does only from what you
    read, else write Unknown. Never describe them in terms of the user's offer.
 5. Draft for each fit, plain text, at most message_max_chars, in language: one
