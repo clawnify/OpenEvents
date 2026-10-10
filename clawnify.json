@@ -1,14 +1,26 @@
 {
   "$schema": "https://app.clawnify.com/schema/v1/clawnify.json",
-  "name": "OpenEvents",
+  "name": "Event networking",
   "description": "Work an event's attendee portal with your agent. It shortlists people worth meeting from the directory, researches each one and drafts a message; you approve every message before the agent sends it through the event's own chat. Replies, meetings and who was contacted are kept across events, so nobody is approached twice.",
+  "icon": "icon.svg",
+  "screenshot": "readme-banner.png",
+  "tags": ["events", "networking", "outreach", "conferences", "agent"],
   "app": {
-    "provides": [
-      "events",
-      "attendees"
-    ],
+    "provides": ["events", "attendees"],
     "framework": "react+hono",
     "database": true
   },
-  "icon": "icon.svg"
+  "agent": "agent.md",
+  "deploy": {
+    "title": "Deploy OpenEvents",
+    "subtitle": "Your agent works the attendee list of your next event. You approve every message before it goes out.",
+    "prompts": [
+      { "key": "event_name", "label": "Which event are you going to next?", "placeholder": "Founders Summit 2026" },
+      { "key": "portal_url", "label": "Its attendee portal", "placeholder": "The page with the attendee list and chat, e.g. https://…/community" },
+      { "key": "event_dates", "label": "When is it?", "placeholder": "13 to 15 October 2026" },
+      { "key": "who_to_meet", "label": "Who do you want to meet there?", "type": "textarea", "placeholder": "Founders of marketing agencies with 5 to 50 people" },
+      { "key": "offer", "label": "What do you offer them?", "type": "textarea", "placeholder": "Leave empty to use what your Company Knowledge says you sell" },
+      { "key": "message_limit", "label": "Longest message the event's chat accepts", "placeholder": "400 characters, if you don't know" }
+    ]
+  }
 }

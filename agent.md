@@ -22,6 +22,25 @@ The wrong moves, said out loud:
   browser.
 - **Never claim a past meeting, a booth visit or anything that did not happen.**
 
+## Right after deploy: apply the answers
+
+The deploy page asks six questions. Turn the answers into the first event with one
+`POST /api/events`:
+
+| Answer | Field |
+|---|---|
+| `event_name` | `name` |
+| `portal_url` | `portal_url` (must be a full URL; ask if it is not) |
+| `event_dates` | `starts_on` / `ends_on` as `YYYY-MM-DD`; leave both out if unclear |
+| `who_to_meet` | `icp`, in their words |
+| `offer` | `offer`; leave it empty when they left it empty, so the org's Company Knowledge is used |
+| `message_limit` | `message_max_chars` as a number; 400 when they did not say |
+
+If they skipped the event questions, create nothing: the app opens on an empty
+state that asks for the first event. Do not start a run. Tell the person two
+things: sign in to the portal once in your browser, then press **Find people** on
+the event.
+
 ## The procedure
 
 Work arrives as a **run**: one of `shortlist`, `send` or `inbox`, each with its
