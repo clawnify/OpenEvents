@@ -1,7 +1,7 @@
 ---
 name: event-shortlist
 description: Shortlist people worth meeting from an event's attendee directory, research them, and draft one message each for the user to approve.
-version: 3
+version: 4
 ---
 
 # Event shortlist
@@ -14,12 +14,13 @@ never claim a past meeting or anything that did not happen.
    unless status is running. GET /api/events/{event_id} for portal_url, icp,
    offer, message_max_chars, language, max_profiles, max_research and
    platform_notes. Read the notes before browsing.
-2. Open portal_url in your existing browser. On a login page:
-   if your environment has EVENT_PORTAL_LOGINS (JSON keyed by the portal's host)
-   with an entry for this host, sign in with those fields once. Never copy the
-   values into the app, a message, coverage or chat. With no entry, a failed
-   sign-in, a CAPTCHA, rate limit or warning: PATCH the run {status: blocked,
-   error} and stop. Never ask anyone for a password or ticket number.
+2. Open portal_url in a new tab of your browser. On a login page, list the
+   names (never the values) of env vars starting EVENT_LOGIN_<HOST>_, HOST being
+   the portal's host in capitals with dots and dashes as underscores. Each
+   name's suffix is a field (EMAIL, TICKET, PASSWORD): type the placeholder
+   {{env:NAME}} into it exactly; the platform substitutes the value. No names,
+   a failed sign-in, CAPTCHA, rate limit or warning: PATCH the run {status:
+   blocked, error} and stop. Never print a value or ask anyone for one.
 3. Find people matching icp with the portal's search, filters or suggestions; if
    search does not filter, browse the list. Skip the host's and the user's own
    colleagues. Open at most max_profiles profiles. Judge each from its profile:

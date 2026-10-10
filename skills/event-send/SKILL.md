@@ -1,7 +1,7 @@
 ---
 name: event-send
 description: Send the messages a person approved, exactly as approved, through the event portal's own chat.
-version: 2
+version: 3
 ---
 
 # Event send
@@ -15,12 +15,13 @@ message anyone else.
    and platform_notes. Read the notes before browsing.
 2. GET /api/events/{event_id}/messages?status=approved (page through). Take at
    most max_sends.
-3. Open portal_url in your existing browser. On a login page:
-   if your environment has EVENT_PORTAL_LOGINS (JSON keyed by the portal's host)
-   with an entry for this host, sign in with those fields once. Never copy the
-   values into the app, a message, coverage or chat. With no entry, a failed
-   sign-in, a CAPTCHA, rate limit or warning: PATCH the run {status: blocked,
-   error} and stop. Never ask anyone for a password or ticket number.
+3. Open portal_url in a new tab of your browser. On a login page, list the
+   names (never the values) of env vars starting EVENT_LOGIN_<HOST>_, HOST being
+   the portal's host in capitals with dots and dashes as underscores. Each
+   name's suffix is a field (EMAIL, TICKET, PASSWORD): type the placeholder
+   {{env:NAME}} into it exactly; the platform substitutes the value. No names,
+   a failed sign-in, CAPTCHA, rate limit or warning: PATCH the run {status:
+   blocked, error} and stop. Never print a value or ask anyone for one.
 4. For each message, open the person's profile (attendee.portal_profile_url, or
    search their name and company) and their chat thread.
    - If the thread holds anything newer than the app shows, do not send. POST

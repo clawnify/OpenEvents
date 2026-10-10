@@ -44,7 +44,7 @@ People are recognised across events by their LinkedIn profile, their name and co
 ## What it deliberately doesn't do
 
 - **It doesn't copy the attendee directory.** The agent reads profiles one at a time as a logged-in attendee, within per-run limits. Exporting a whole directory into an outreach tool is the kind of event outreach attendees complain about.
-- **It doesn't keep your login.** By default you sign in to the portal once, through your agent's browser, and the agent stops and tells you whenever it hits a login page. To let it sign back in on its own, add an `EVENT_PORTAL_LOGINS` environment variable in your workspace settings, JSON keyed by the portal's host: `{"portal.example.com": {"email": "you@company.com", "ticket": "12345678"}}`. The agent reads it only on that portal's login page. It still sees the values while typing them, so use this for event tickets, not for passwords you use anywhere else.
+- **It doesn't keep your login.** By default you sign in to the portal once, through your agent's browser, and the agent stops and tells you whenever it hits a login page. To let it sign in on its own, add workspace environment variables named after the portal's host and the field, e.g. `EVENT_LOGIN_PORTAL_EXAMPLE_COM_EMAIL` and `EVENT_LOGIN_PORTAL_EXAMPLE_COM_TICKET`. On Clawnify the agent types them as `{{env:NAME}}` placeholders that the platform fills in at the last moment, so the values never enter its conversation. Use this for event tickets, not passwords you use anywhere else.
 - **It doesn't reply on its own,** even to messages it reads during an inbox check.
 
 ## Running it
