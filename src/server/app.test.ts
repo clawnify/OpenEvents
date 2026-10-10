@@ -188,6 +188,15 @@ describe("approval", () => {
     await call("PATCH", `/api/attendees/${d.attendee_id}`, { status: "skipped" });
     expect((await call("GET", `/api/events/${eventId}/messages?status=discarded`)).body.total).toBe(1);
   });
+
+  it("marking someone contacted by hand drops the draft waiting for them", async () => {
+    const eventId = await newEvent();
+    await shortlist(await newRun(eventId, "shortlist"), [person("Mira Holt")]);
+    const [d] = await drafts(eventId);
+    await call("PATCH", `/api/attendees/${d.attendee_id}`, { status: "contacted" });
+    expect(await drafts(eventId)).toHaveLength(0);
+    expect((await call("GET", `/api/events/${eventId}/messages?status=discarded`)).body.total).toBe(1);
+  });
 });
 
 describe("inbox", () => {

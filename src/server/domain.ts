@@ -519,8 +519,9 @@ export async function setAttendeeStatus(id: string, actor: Actor, status: Attend
   if (!actor.approver) throw new InputError("Only a person can change who to contact.", 403, "approval_required");
   const a = await readAttendee(id);
   await run("UPDATE attendees SET status = ?, updated_at = datetime('now') WHERE id = ?", [status, a.id]);
-  if (status === "skipped" || status === "declined") {
-    // Nobody we decided not to contact keeps a message waiting to go out.
+  if (status === "skipped" || status === "declined" || status === "contacted") {
+    // Nobody we decided not to contact keeps a message waiting to go out, and
+    // neither does someone a person reached another way: it would be a second first message.
     await run(
       "UPDATE messages SET status = 'discarded', updated_at = datetime('now') WHERE attendee_id = ? AND direction = 'out' AND status IN ('draft', 'approved', 'held', 'failed')",
       [a.id],
