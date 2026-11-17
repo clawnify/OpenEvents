@@ -5,3 +5,5 @@ onlyBuiltDependencies:
 allowBuilds:
   esbuild: true
   workerd: true
+minimumReleaseAgeExclude:
+  - '@clawnify/app@0.4.8'

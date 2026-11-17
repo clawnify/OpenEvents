@@ -13,7 +13,7 @@
   },
   "dependencies": {
     "@clawnify/agents": "^0.1.1",
-    "@clawnify/app": "^0.4.4",
+    "@clawnify/app": "^0.4.8",
     "@clawnify/db": "^0.4.3",
     "@clawnify/knowledge": "^0.1.0",
     "@hono/zod-openapi": "^0.19.10",
